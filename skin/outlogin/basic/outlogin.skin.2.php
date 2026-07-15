@@ -30,6 +30,16 @@
                 <strong class="ol_stat_val"><?php echo $mb_scrap_cnt ?: 0; ?></strong>
             </a>
         </li>
+        <?php if (function_exists('_atc_render_floating_banner')) {
+            $atc_today_done = sql_fetch("SELECT at_id FROM {$g5['table_prefix']}attendance_log WHERE mb_id = '" . addslashes($member['mb_id']) . "' AND at_date = '" . G5_TIME_YMD . "'");
+        ?>
+        <li>
+            <a href="<?php echo G5_PLUGIN_URL ?>/attendance/" target="_blank" class="win_attendance">
+                <span class="ol_stat_label">출석</span>
+                <strong class="ol_stat_val<?php echo $atc_today_done ? ' ol_stat_done' : ''; ?>"><?php echo $atc_today_done ? '완료' : '미출석'; ?></strong>
+            </a>
+        </li>
+        <?php } ?>
     </ul>
 
     <div class="ol_actions">

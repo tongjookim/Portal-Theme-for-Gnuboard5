@@ -758,6 +758,7 @@ html[data-theme="dark"] #portal_header .dark_mode_toggle:hover { color: var(--po
 .ol_stat_label { font-size: 11px; color: var(--portal-text-sub); margin-bottom: 4px; }
 .ol_stat_val { font-size: 15px; font-weight: 700; color: var(--portal-text); }
 .ol_stat_new { color: #e84040; }
+.ol_stat_done { color: var(--portal-primary); }
 
 .ol_actions {
     display: flex;
