@@ -14,6 +14,14 @@ $g5_debug['php']['begin_time'] = $begin_time = get_microtime();
 if (!isset($g5['title'])) {
     $g5['title'] = $config['cf_title'];
     $g5_head_title = $g5['title'];
+
+    // 메인 페이지: 사이트 태그라인이 설정되어 있으면 브라우저 타이틀에 함께 노출
+    if (function_exists('stf_get_meta')) {
+        $g5_tagline = stf_get_meta()['tagline'] ?? '';
+        if ($g5_tagline !== '') {
+            $g5_head_title = implode(' - ', array_filter(array($g5_head_title, $g5_tagline)));
+        }
+    }
 } else {
     $g5_head_title = implode(' | ', array_filter(array($g5['title'], $config['cf_title'])));
 }

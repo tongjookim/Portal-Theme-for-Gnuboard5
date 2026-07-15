@@ -180,13 +180,13 @@ while ($_brow = sql_fetch_array($_boards_rs)) {
     <div class="guide_bar_inner">
         <i class="fa fa-info-circle guide_bar_icon" aria-hidden="true"></i>
         <span class="guide_bar_text">처음 오셨나요? 이용 가이드를 확인하세요</span>
-        <a href="https://www.maru.or.kr/content/guide" class="guide_bar_btn" target="_blank" rel="noopener">바로가기</a>
+        <a href="<?php echo G5_BBS_URL ?>/content.php?co_id=guide" class="guide_bar_btn">바로가기</a>
     </div>
 </div>
 
 <!-- 사이트 히어로 배너 -->
 <div class="site_hero">
-    <h2 class="site_hero_title">사람 냄새 나는 인문학 커뮤니티, 마루 밑 다락방</h2>
+    <h2 class="site_hero_title">포털 사이트를 PORTAL 테마로 뚝딱 만드세요!</h2>
     <div class="site_hero_stats">
         <div class="hero_stat">
             <strong class="hero_stat_value"><?php echo number_format($_hero_visitors) ?></strong>

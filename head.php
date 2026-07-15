@@ -1,6 +1,11 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
+// 코어 root head.php 는 pre_head 이벤트를 발생시킨 뒤 테마 head.php 로 위임하는데,
+// 테마가 활성화된 페이지(index.php 등)는 root head.php 를 거치지 않고 이 파일을 직접
+// include 하므로, pre_head 훅에 의존하는 extend 파일들이 동작하도록 여기서도 동일하게 발생시킨다.
+run_event('pre_head');
+
 // 코어의 head.sub.php를 불러와 <html>, <head> 태그를 엽니다.
 // 테마 head.sub.php 가 존재하면 root 가 위임하므로 항상 root 를 호출
 include_once(G5_PATH.'/head.sub.php');

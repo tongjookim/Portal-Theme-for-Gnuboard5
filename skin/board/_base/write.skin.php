@@ -1,5 +1,14 @@
 <?php if (!defined('_GNUBOARD_')) exit;
 
+/*
+ * 게시물별 다운로드 포인트 옵션
+ * - 여분 필드 wr_1 에 저장 (write_update.php 가 wr_1~wr_10 을 $_POST 값 그대로 자동 저장)
+ * - 실제 차감 반영은 extend/cafe_style_download_point.extend.php 에서 $board['bo_download_point'] 를
+ *   덮어써 처리(스킨과 무관하게 모든 게시판에 공통 적용)
+ * - 비워두면 게시판 기본값(bo_download_point)을 그대로 사용
+ */
+$_wr_download_point = ($w == 'u' && isset($write['wr_1'])) ? $write['wr_1'] : '';
+
 $option        = '';
 $option_hidden = '';
 if ($is_notice || $is_html || $is_secret || $is_mail) {
@@ -164,6 +173,20 @@ $_list_url = get_pretty_url($bo_table);
                 </label>
             </div>
             <?php } ?>
+        </div>
+    </div>
+    <?php } ?>
+
+    <?php if ($is_file) { ?>
+    <div class="bsk_write_row">
+        <label for="wr_1" class="bsk_write_label"><i class="fa fa-coins"></i> 다운로드 포인트</label>
+        <div class="bsk_write_field">
+            <input type="number" name="wr_1" id="wr_1" value="<?php echo htmlspecialchars($_wr_download_point) ?>"
+                   class="bsk_input bsk_input_sm" placeholder="예: -20" step="1">
+            <p class="bsk_write_hint" style="margin-top:6px;font-size:13px;color:#888;">
+                이 글의 첨부파일을 내려받을 때 차감(또는 지급)할 포인트입니다. 음수를 입력하면 다운로드 시 포인트가 차감됩니다.
+                비워두면 게시판 기본 다운로드 포인트(<?php echo number_format($board['bo_download_point']) ?>P)가 적용됩니다.
+            </p>
         </div>
     </div>
     <?php } ?>
