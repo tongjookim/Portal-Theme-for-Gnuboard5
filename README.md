@@ -49,3 +49,7 @@
 ## 라이선스
 
 `LICENSE` 파일(GNU Lesser General Public License v2.1)을 따릅니다.
+
+## 버그 제보
+
+버그는 github 이슈로 제보하거나 그누엑스퍼트(www.gnuexport.com) Q&A를 이용해 주십시오.
