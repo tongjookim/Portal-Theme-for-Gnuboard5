@@ -58,16 +58,21 @@ include_once(G5_THEME_PATH.'/portal.settings.php');
                 </a>
             </div>
             
+            <?php $portal_search_plugin_file = $_SERVER['DOCUMENT_ROOT'].'/plugin/portal-search-page/index.php'; ?>
+            <?php $portal_search_plugin_on  = is_file($portal_search_plugin_file); ?>
+            <?php $portal_search_action = $portal_search_plugin_on ? G5_PLUGIN_URL.'/portal-search-page/index.php' : G5_BBS_URL.'/search.php'; ?>
             <div class="search_wrap">
-                <form name="fsearchbox" method="get" action="<?php echo G5_PLUGIN_URL ?>/portal-search-page/index.php" onsubmit="return fsearchbox_submit(this);">
+                <form name="fsearchbox" method="get" action="<?php echo $portal_search_action ?>" onsubmit="return fsearchbox_submit(this);">
                     <input type="text" name="stx" id="sch_stx" placeholder="검색어를 입력하세요">
+                    <?php if ($portal_search_plugin_on): ?>
                     <button type="button" id="sch_keyboard_btn" class="sch_keyboard_btn" title="입력도구" aria-label="입력도구"><i class="fa fa-keyboard-o" aria-hidden="true"></i></button>
                     <button type="button" id="sch_voice_btn" class="sch_voice_btn" title="음성 검색" aria-label="음성 검색"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                    <?php endif; ?>
                     <button type="submit" id="sch_submit"><i class="fa fa-search" aria-hidden="true"></i><span class="sch_text"> 검색</span></button>
                 </form>
             </div>
 
-            <?php if ($is_admin == 'super'): ?>
+            <?php if ($is_admin == 'super' && $portal_search_plugin_on): ?>
             <a href="<?php echo G5_PLUGIN_URL ?>/portal-search-page/admin.php" class="search_admin_btn" title="검색 플러그인 관리자 설정">
                 <i class="fa fa-cog" aria-hidden="true"></i>
             </a>
@@ -196,6 +201,7 @@ include_once(G5_THEME_PATH.'/portal.settings.php');
     });
     </script>
 
+    <?php if ($portal_search_plugin_on): ?>
     <script src="<?php echo G5_PLUGIN_URL ?>/portal-search-page/js/search-tools.js?ver=<?php echo G5_SERVER_TIME; ?>"></script>
     <script>
     PtsSearchTools.init({
@@ -205,6 +211,7 @@ include_once(G5_THEME_PATH.'/portal.settings.php');
         keyboardBtnId: 'sch_keyboard_btn'
     });
     </script>
+    <?php endif; ?>
 
     <!-- Main Container Start -->
     <div id="portal_container">
